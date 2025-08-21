@@ -1,0 +1,40 @@
+# Configuration file for grain irradiation simulation
+simulation:
+  default_source: "Co-60"
+  default_material: "wheat"
+  default_geometry:
+    shape: "sphere"
+    dimensions:
+      radius: 1.0
+  grid_resolution: 50
+
+materials:
+  # Additional custom materials can be added here
+  custom_wheat:
+    density: 0.82
+    atomic_number: 6.5
+    mass_attenuation_coefficient: 0.0302
+    name: "custom_wheat"
+
+sources:
+  # Custom source configurations
+  custom_co60:
+    energy: 1.25
+    half_life: 5.27
+    dose_rate_constant: 1.32
+
+visualization:
+  output_directory: "./plots"
+  save_format: "png"
+  dpi: 300
+  colormap: "plasma"
+
+logging:
+  level: "INFO"
+  file: null
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+validation:
+  dose_tolerance: 0.1  # 10% tolerance for dose calculations
+  max_dose_warning: 50000  # Gy
+  max_exposure_time_warning: 48  # hours

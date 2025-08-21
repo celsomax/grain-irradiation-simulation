@@ -1,0 +1,16 @@
+sample_id,material,dose,dose_rate,exposure_time,source_type,source_activity,distance,temperature,humidity,notes
+WH001,wheat,2.5,1.25,2.0,Co-60,1000,50,25,65,Control sample
+WH002,wheat,5.0,2.5,2.0,Co-60,1000,35,25,65,Higher dose experiment
+WH003,wheat,7.5,3.75,2.0,Co-60,1000,28,25,65,Maximum safe dose
+RC001,rice,1.5,0.75,2.0,Co-60,800,60,20,70,Low dose treatment
+RC002,rice,3.0,1.5,2.0,Co-60,800,42,20,70,Medium dose treatment
+RC003,rice,6.0,3.0,2.0,Co-60,800,30,20,70,High dose treatment
+CN001,corn,2.0,1.0,2.0,Cs-137,500,45,22,60,Cs-137 source test
+CN002,corn,4.0,2.0,2.0,Cs-137,500,32,22,60,Double dose
+CN003,corn,8.0,4.0,2.0,Cs-137,500,22,22,60,High dose validation
+WH004,wheat,3.0,6.0,0.5,LinAc,10,100,25,65,Linear accelerator test
+WH005,wheat,1.0,0.5,2.0,Co-60,500,75,25,65,Low activity source
+RC004,rice,2.5,0.833,3.0,Co-60,800,50,20,70,Extended exposure
+CN004,corn,5.0,2.5,2.0,Co-60,1200,35,22,60,High activity test
+WH006,wheat,10.0,5.0,2.0,Co-60,1500,25,25,65,Sterilization dose
+RC005,rice,0.5,0.25,2.0,Co-60,400,80,20,70,Minimum effective dose
