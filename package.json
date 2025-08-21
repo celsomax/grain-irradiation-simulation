@@ -1,0 +1,43 @@
+{
+  "name": "grain-irradiation-simulation-js",
+  "version": "1.0.0",
+  "description": "Modern JavaScript web application for grain irradiation simulation",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "three": "^0.160.1",
+    "d3": "^7.8.5",
+    "plotly.js-dist": "^2.29.1"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/three": "^0.160.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4",
+    "vitest": "^1.3.1",
+    "vite-plugin-pwa": "^0.17.5"
+  },
+  "keywords": [
+    "grain-irradiation",
+    "simulation",
+    "physics",
+    "radiation",
+    "food-science",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Grain Irradiation Simulation Team",
+  "license": "MIT"
+}

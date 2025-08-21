@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain Irradiation Simulation</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Modern web application for grain irradiation simulation">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="title">
+                    <span class="icon">🌾</span>
+                    Grain Irradiation Simulation
+                </h1>
+                <nav class="nav">
+                    <button class="nav-btn active" data-tab="simulation">Simulation</button>
+                    <button class="nav-btn" data-tab="data">Data</button>
+                    <button class="nav-btn" data-tab="visualization">Visualization</button>
+                    <button class="nav-btn" data-tab="results">Results</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Simulation Tab -->
+            <section id="simulation-tab" class="tab-content active">
+                <div class="container">
+                    <div class="grid">
+                        <!-- Parameters Panel -->
+                        <div class="panel parameters-panel">
+                            <h2>Simulation Parameters</h2>
+                            
+                            <!-- Radiation Source -->
+                            <div class="input-group">
+                                <label for="source-type">Radiation Source</label>
+                                <select id="source-type" class="input">
+                                    <option value="Co-60">Cobalt-60 (Co-60)</option>
+                                    <option value="Cs-137">Cesium-137 (Cs-137)</option>
+                                    <option value="LinAc">Linear Accelerator (LinAc)</option>
+                                </select>
+                            </div>
+
+                            <!-- Material -->
+                            <div class="input-group">
+                                <label for="material">Material</label>
+                                <select id="material" class="input">
+                                    <option value="wheat">Wheat</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="corn">Corn</option>
+                                    <option value="water">Water</option>
+                                </select>
+                            </div>
+
+                            <!-- Activity -->
+                            <div class="input-group">
+                                <label for="activity">Source Activity</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="activity" class="input" value="1000" min="1" step="1">
+                                    <span class="unit">Ci</span>
+                                </div>
+                            </div>
+
+                            <!-- Distance -->
+                            <div class="input-group">
+                                <label for="distance">Source Distance</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="distance" class="input" value="50" min="1" step="1">
+                                    <span class="unit">cm</span>
+                                </div>
+                            </div>
+
+                            <!-- Exposure Time -->
+                            <div class="input-group">
+                                <label for="exposure-time">Exposure Time</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="exposure-time" class="input" value="2.0" min="0.1" step="0.1">
+                                    <span class="unit">hours</span>
+                                </div>
+                            </div>
+
+                            <!-- Geometry -->
+                            <div class="input-group">
+                                <label for="geometry">Geometry</label>
+                                <select id="geometry" class="input">
+                                    <option value="sphere">Sphere</option>
+                                    <option value="cylinder">Cylinder</option>
+                                    <option value="box">Box</option>
+                                </select>
+                            </div>
+
+                            <!-- Geometry Dimensions -->
+                            <div id="geometry-dimensions" class="input-group">
+                                <div id="sphere-dimensions" class="geometry-inputs">
+                                    <label for="radius">Radius (cm)</label>
+                                    <input type="number" id="radius" class="input" value="1.0" min="0.1" step="0.1">
+                                </div>
+                                <div id="cylinder-dimensions" class="geometry-inputs hidden">
+                                    <label for="cyl-radius">Radius (cm)</label>
+                                    <input type="number" id="cyl-radius" class="input" value="1.0" min="0.1" step="0.1">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="number" id="height" class="input" value="2.0" min="0.1" step="0.1">
+                                </div>
+                                <div id="box-dimensions" class="geometry-inputs hidden">
+                                    <label for="length">Length (cm)</label>
+                                    <input type="number" id="length" class="input" value="2.0" min="0.1" step="0.1">
+                                    <label for="width">Width (cm)</label>
+                                    <input type="number" id="width" class="input" value="2.0" min="0.1" step="0.1">
+                                    <label for="box-height">Height (cm)</label>
+                                    <input type="number" id="box-height" class="input" value="2.0" min="0.1" step="0.1">
+                                </div>
+                            </div>
+
+                            <!-- Advanced Options -->
+                            <details class="advanced-options">
+                                <summary>Advanced Options</summary>
+                                <div class="input-group">
+                                    <label for="temperature">Temperature (°C)</label>
+                                    <input type="number" id="temperature" class="input" value="25" step="0.1">
+                                </div>
+                                <div class="input-group">
+                                    <label for="humidity">Humidity (%)</label>
+                                    <input type="number" id="humidity" class="input" value="65" min="0" max="100" step="1">
+                                </div>
+                                <div class="input-group">
+                                    <label for="grid-resolution">Grid Resolution</label>
+                                    <input type="number" id="grid-resolution" class="input" value="50" min="10" max="200" step="10">
+                                </div>
+                            </details>
+
+                            <!-- Action Buttons -->
+                            <div class="button-group">
+                                <button id="run-simulation" class="button primary">Run Simulation</button>
+                                <button id="optimize-parameters" class="button secondary">Optimize</button>
+                                <button id="load-preset" class="button secondary">Load Preset</button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Results Panel -->
+                        <div class="panel results-panel">
+                            <h2>Quick Results</h2>
+                            <div id="quick-results" class="results-display">
+                                <div class="result-item">
+                                    <span class="label">Uniform Dose:</span>
+                                    <span id="uniform-dose" class="value">-- Gy</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="label">Mean Dose:</span>
+                                    <span id="mean-dose" class="value">-- Gy</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="label">Max Dose:</span>
+                                    <span id="max-dose" class="value">-- Gy</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="label">Min Dose:</span>
+                                    <span id="min-dose" class="value">-- Gy</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="label">Dose Uniformity:</span>
+                                    <span id="dose-uniformity" class="value">--</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="label">Computation Time:</span>
+                                    <span id="computation-time" class="value">-- s</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Chart -->
+                    <div class="panel chart-panel">
+                        <h2>Dose Distribution Preview</h2>
+                        <div class="chart-container">
+                            <canvas id="live-chart" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Tab -->
+            <section id="data-tab" class="tab-content">
+                <div class="container">
+                    <div class="grid">
+                        <!-- Data Loading Panel -->
+                        <div class="panel data-panel">
+                            <h2>Experimental Data</h2>
+                            
+                            <div class="input-group">
+                                <label for="data-file">Load Data File</label>
+                                <input type="file" id="data-file" class="input" accept=".csv,.json">
+                            </div>
+
+                            <div class="button-group">
+                                <button id="load-sample-data" class="button secondary">Load Sample Data</button>
+                                <button id="validate-data" class="button secondary">Validate Data</button>
+                                <button id="export-data" class="button secondary">Export Data</button>
+                            </div>
+
+                            <div id="data-summary" class="data-summary hidden">
+                                <h3>Data Summary</h3>
+                                <div id="summary-stats"></div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table Panel -->
+                        <div class="panel table-panel">
+                            <h2>Data Table</h2>
+                            <div class="table-container">
+                                <table id="data-table" class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sample ID</th>
+                                            <th>Material</th>
+                                            <th>Dose (Gy)</th>
+                                            <th>Source</th>
+                                            <th>Activity</th>
+                                            <th>Time (h)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Tab -->
+            <section id="visualization-tab" class="tab-content">
+                <div class="container">
+                    <div class="panel">
+                        <h2>Data Visualization</h2>
+                        <div class="viz-controls">
+                            <button id="plot-dose-dist" class="button secondary">Dose Distribution</button>
+                            <button id="plot-comparison" class="button secondary">Exp vs Sim</button>
+                            <button id="plot-3d" class="button secondary">3D Visualization</button>
+                            <button id="plot-statistics" class="button secondary">Statistics</button>
+                        </div>
+                        <div class="chart-grid">
+                            <div class="chart-container">
+                                <canvas id="viz-chart-1" width="600" height="400"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="viz-chart-2" width="600" height="400"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <div id="viz-3d" style="width: 600px; height: 400px;"></div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="viz-chart-4" width="600" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Tab -->
+            <section id="results-tab" class="tab-content">
+                <div class="container">
+                    <div class="panel">
+                        <h2>Detailed Results</h2>
+                        <div class="results-controls">
+                            <button id="save-results" class="button primary">Save Results</button>
+                            <button id="generate-report" class="button secondary">Generate Report</button>
+                            <button id="export-images" class="button secondary">Export Images</button>
+                        </div>
+                        <div id="detailed-results" class="detailed-results">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Running simulation...</p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
