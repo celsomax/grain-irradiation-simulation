@@ -262,7 +262,7 @@ class DataLoader:
                     )
                 
                 # Check reasonable dose ranges for food irradiation
-                if experiment.dose < 0.01 or experiment.dose > 10000:  # 0.01 Gy to 10 kGy (lower threshold)
+                if experiment.dose < 0.01 or experiment.dose > 50:  # 0.01 Gy to 50 Gy (more reasonable upper threshold)
                     record_warnings.append(f"Unusual dose value: {experiment.dose:.2f} Gy")
                 
                 # Check exposure time reasonableness

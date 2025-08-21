@@ -1,0 +1,175 @@
+{
+  "materials": {
+    "wheat": {
+      "name": "wheat",
+      "density": 0.8,
+      "atomic_number": 6.5,
+      "mass_attenuation_coefficient": 0.0302,
+      "description": "Common wheat grains",
+      "typical_moisture": 14.0,
+      "safe_storage_temperature": 15,
+      "recommended_max_dose": 1.0,
+      "germination_characteristics": {
+        "baseline_rate": 95,
+        "temperature_sensitivity": "medium",
+        "radiation_sensitivity": "medium"
+      },
+      "nutritional_composition": {
+        "protein_percent": 13.2,
+        "carbohydrate_percent": 71.0,
+        "fat_percent": 2.5,
+        "fiber_percent": 12.2,
+        "ash_percent": 1.8
+      }
+    },
+    "rice": {
+      "name": "rice",
+      "density": 0.75,
+      "atomic_number": 6.3,
+      "mass_attenuation_coefficient": 0.0298,
+      "description": "Milled rice grains",
+      "typical_moisture": 14.0,
+      "safe_storage_temperature": 15,
+      "recommended_max_dose": 1.5,
+      "germination_characteristics": {
+        "baseline_rate": 90,
+        "temperature_sensitivity": "high",
+        "radiation_sensitivity": "medium-high"
+      },
+      "nutritional_composition": {
+        "protein_percent": 7.1,
+        "carbohydrate_percent": 79.0,
+        "fat_percent": 0.7,
+        "fiber_percent": 1.3,
+        "ash_percent": 0.4
+      }
+    },
+    "corn": {
+      "name": "corn",
+      "density": 0.72,
+      "atomic_number": 6.4,
+      "mass_attenuation_coefficient": 0.0300,
+      "description": "Corn kernels",
+      "typical_moisture": 15.5,
+      "safe_storage_temperature": 10,
+      "recommended_max_dose": 1.0,
+      "germination_characteristics": {
+        "baseline_rate": 92,
+        "temperature_sensitivity": "medium",
+        "radiation_sensitivity": "low-medium"
+      },
+      "nutritional_composition": {
+        "protein_percent": 9.4,
+        "carbohydrate_percent": 74.0,
+        "fat_percent": 4.7,
+        "fiber_percent": 7.3,
+        "ash_percent": 1.2
+      }
+    },
+    "barley": {
+      "name": "barley",
+      "density": 0.68,
+      "atomic_number": 6.5,
+      "mass_attenuation_coefficient": 0.0304,
+      "description": "Barley grains",
+      "typical_moisture": 14.0,
+      "safe_storage_temperature": 15,
+      "recommended_max_dose": 0.8,
+      "germination_characteristics": {
+        "baseline_rate": 85,
+        "temperature_sensitivity": "medium",
+        "radiation_sensitivity": "medium-high"
+      },
+      "nutritional_composition": {
+        "protein_percent": 12.5,
+        "carbohydrate_percent": 73.5,
+        "fat_percent": 2.3,
+        "fiber_percent": 17.3,
+        "ash_percent": 2.3
+      }
+    },
+    "soybeans": {
+      "name": "soybeans",
+      "density": 0.85,
+      "atomic_number": 6.8,
+      "mass_attenuation_coefficient": 0.0308,
+      "description": "Soybean seeds",
+      "typical_moisture": 13.0,
+      "safe_storage_temperature": 10,
+      "recommended_max_dose": 2.0,
+      "germination_characteristics": {
+        "baseline_rate": 88,
+        "temperature_sensitivity": "medium",
+        "radiation_sensitivity": "low"
+      },
+      "nutritional_composition": {
+        "protein_percent": 36.5,
+        "carbohydrate_percent": 30.2,
+        "fat_percent": 19.9,
+        "fiber_percent": 9.3,
+        "ash_percent": 4.9
+      }
+    }
+  },
+  "radiation_sources": {
+    "Co-60": {
+      "type": "gamma",
+      "energy_mev": 1.25,
+      "half_life_years": 5.27,
+      "dose_constant": 13.2,
+      "description": "Cobalt-60 gamma source"
+    },
+    "Cs-137": {
+      "type": "gamma", 
+      "energy_mev": 0.662,
+      "half_life_years": 30.2,
+      "dose_constant": 3.26,
+      "description": "Cesium-137 gamma source"
+    },
+    "LinAc": {
+      "type": "electron",
+      "energy_mev": 10.0,
+      "beam_power_kw": 10,
+      "description": "Linear accelerator electron beam"
+    }
+  },
+  "treatment_guidelines": {
+    "disinfection": {
+      "dose_range_gy": [0.15, 0.5],
+      "purpose": "Insect disinfestation",
+      "microorganisms": ["insects", "mites"]
+    },
+    "quarantine": {
+      "dose_range_gy": [0.2, 1.0],
+      "purpose": "Quarantine treatment",
+      "microorganisms": ["insects", "bacteria"]
+    },
+    "decontamination": {
+      "dose_range_gy": [1.0, 3.0],
+      "purpose": "Microbial decontamination",
+      "microorganisms": ["bacteria", "mold", "yeast"]
+    },
+    "sterilization": {
+      "dose_range_gy": [5.0, 10.0],
+      "purpose": "Complete sterilization",
+      "microorganisms": ["all_pathogens"]
+    }
+  },
+  "quality_standards": {
+    "germination_minimum": {
+      "food_grade": 0,
+      "seed_grade": 80,
+      "feed_grade": 0
+    },
+    "protein_retention_minimum": {
+      "food_grade": 90,
+      "seed_grade": 85,
+      "feed_grade": 75
+    },
+    "overall_quality_minimum": {
+      "food_grade": 75,
+      "seed_grade": 80,
+      "feed_grade": 60
+    }
+  }
+}

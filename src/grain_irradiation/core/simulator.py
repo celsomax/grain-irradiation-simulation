@@ -16,6 +16,7 @@ from .physics import (
     IrradiationPhysics, RadiationSource, MaterialProperties, 
     GeometryConfig
 )
+from .models import GrainIrradiationModels, MicrobialType
 from ..data.loader import ExperimentalData, DataLoader
 
 # Configure logging
@@ -97,6 +98,7 @@ class IrradiationSimulator:
         self.logger = logging.getLogger(__name__ + ".IrradiationSimulator")
         self.physics = IrradiationPhysics()
         self.data_loader = DataLoader()
+        self.grain_models = GrainIrradiationModels()
         
         # Simulation history
         self.simulation_history: List[SimulationResults] = []
@@ -260,6 +262,87 @@ class IrradiationSimulator:
                         f"Mean dose: {mean_dose:.2f} Gy")
         
         return results
+    
+    def calculate_grain_effects(self, 
+                               dose: float, 
+                               grain_type: str,
+                               temperature: Optional[float] = None,
+                               moisture_content: Optional[float] = None) -> Dict[str, Any]:
+        """
+        Calculate comprehensive grain irradiation effects.
+        
+        Args:
+            dose: Radiation dose (Gy)
+            grain_type: Type of grain
+            temperature: Storage temperature (°C)
+            moisture_content: Moisture content (%)
+            
+        Returns:
+            Dictionary with comprehensive effects analysis
+        """
+        # Calculate microbial inactivation for common organisms
+        bacteria_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.BACTERIA
+        )
+        mold_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.MOLD
+        )
+        insects_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.INSECTS
+        )
+        
+        # Calculate quality effects
+        quality_result = self.grain_models.calculate_grain_quality_effects(
+            dose, grain_type, temperature, moisture_content
+        )
+        
+        # Calculate biochemical changes
+        biochemical_changes = self.grain_models.calculate_biochemical_changes(dose, grain_type)
+        
+        # Get treatment validation
+        validation = self.grain_models.validate_treatment_parameters(dose, grain_type)
+        
+        return {
+            'dose_Gy': dose,
+            'grain_type': grain_type,
+            'microbial_inactivation': {
+                'bacteria': bacteria_result.__dict__,
+                'mold': mold_result.__dict__,
+                'insects': insects_result.__dict__
+            },
+            'quality_effects': quality_result.__dict__,
+            'biochemical_changes': biochemical_changes,
+            'treatment_validation': validation
+        }
+    
+    def get_treatment_recommendation(self, 
+                                   grain_type: str, 
+                                   target_log_reduction: float = 3.0,
+                                   target_use: str = "food") -> Dict[str, Any]:
+        """
+        Get comprehensive treatment recommendation.
+        
+        Args:
+            grain_type: Type of grain
+            target_log_reduction: Desired microbial reduction (log cycles)
+            target_use: Intended use ("food", "seed", "feed")
+            
+        Returns:
+            Comprehensive treatment recommendation
+        """
+        recommendation = self.grain_models.get_treatment_recommendation(
+            grain_type, target_log_reduction, MicrobialType.BACTERIA
+        )
+        
+        # Add validation for the recommended dose
+        validation = self.grain_models.validate_treatment_parameters(
+            recommendation['required_dose_Gy'], grain_type, target_use
+        )
+        
+        recommendation['validation'] = validation
+        recommendation['target_use'] = target_use
+        
+        return recommendation
     
     def run_batch_simulation(self, 
                            parameter_sets: List[SimulationParameters]) -> List[SimulationResults]:
@@ -536,3 +619,84 @@ class IrradiationSimulator:
             "mean_computation_time": np.mean(times),
             "last_simulation": self.simulation_history[-1].timestamp
         }
+    
+    def calculate_grain_effects(self, 
+                               dose: float, 
+                               grain_type: str,
+                               temperature: Optional[float] = None,
+                               moisture_content: Optional[float] = None) -> Dict[str, Any]:
+        """
+        Calculate comprehensive grain irradiation effects.
+        
+        Args:
+            dose: Radiation dose (Gy)
+            grain_type: Type of grain
+            temperature: Storage temperature (°C)
+            moisture_content: Moisture content (%)
+            
+        Returns:
+            Dictionary with comprehensive effects analysis
+        """
+        # Calculate microbial inactivation for common organisms
+        bacteria_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.BACTERIA
+        )
+        mold_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.MOLD
+        )
+        insects_result = self.grain_models.calculate_microbial_inactivation(
+            dose, MicrobialType.INSECTS
+        )
+        
+        # Calculate quality effects
+        quality_result = self.grain_models.calculate_grain_quality_effects(
+            dose, grain_type, temperature, moisture_content
+        )
+        
+        # Calculate biochemical changes
+        biochemical_changes = self.grain_models.calculate_biochemical_changes(dose, grain_type)
+        
+        # Get treatment validation
+        validation = self.grain_models.validate_treatment_parameters(dose, grain_type)
+        
+        return {
+            'dose_Gy': dose,
+            'grain_type': grain_type,
+            'microbial_inactivation': {
+                'bacteria': bacteria_result.__dict__,
+                'mold': mold_result.__dict__,
+                'insects': insects_result.__dict__
+            },
+            'quality_effects': quality_result.__dict__,
+            'biochemical_changes': biochemical_changes,
+            'treatment_validation': validation
+        }
+    
+    def get_treatment_recommendation(self, 
+                                   grain_type: str, 
+                                   target_log_reduction: float = 3.0,
+                                   target_use: str = "food") -> Dict[str, Any]:
+        """
+        Get comprehensive treatment recommendation.
+        
+        Args:
+            grain_type: Type of grain
+            target_log_reduction: Desired microbial reduction (log cycles)
+            target_use: Intended use ("food", "seed", "feed")
+            
+        Returns:
+            Comprehensive treatment recommendation
+        """
+        recommendation = self.grain_models.get_treatment_recommendation(
+            grain_type, target_log_reduction, MicrobialType.BACTERIA
+        )
+        
+        # Add validation for the recommended dose
+        validation = self.grain_models.validate_treatment_parameters(
+            recommendation['required_dose_Gy'], grain_type, target_use
+        )
+        
+        recommendation['validation'] = validation
+        recommendation['target_use'] = target_use
+        
+        return recommendation
