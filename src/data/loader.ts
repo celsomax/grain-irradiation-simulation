@@ -113,7 +113,7 @@ export class DataLoader {
       throw new Error('Invalid JSON format: expected array or object with experiments property');
     }
 
-    const result = experiments.map((exp, index) => this.parseExperimentalRecord(exp, index));
+    const result = experiments.map((exp) => this.parseExperimentalRecord(exp));
     this.logger.info(`Loaded ${result.length} experimental records from JSON`);
     return result;
   }
