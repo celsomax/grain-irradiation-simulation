@@ -1,0 +1,49 @@
+{
+  "experiments": [
+    {
+      "sample_id": "WH007",
+      "material": "wheat",
+      "dose": 3.5,
+      "dose_rate": 1.75,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1000,
+      "distance": 40,
+      "temperature": 25,
+      "humidity": 65,
+      "operator": "Dr. Silva",
+      "date": "2024-01-15",
+      "equipment": "Gamma irradiator model GC-5000"
+    },
+    {
+      "sample_id": "RC006",
+      "material": "rice",
+      "dose": 4.5,
+      "dose_rate": 2.25,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1200,
+      "distance": 35,
+      "temperature": 20,
+      "humidity": 70,
+      "operator": "Dr. Santos",
+      "date": "2024-01-16",
+      "equipment": "Gamma irradiator model GC-5000"
+    },
+    {
+      "sample_id": "CN005",
+      "material": "corn",
+      "dose": 6.0,
+      "dose_rate": 12.0,
+      "exposure_time": 0.5,
+      "source_type": "LinAc",
+      "source_activity": 15,
+      "distance": 120,
+      "temperature": 22,
+      "humidity": 60,
+      "operator": "Dr. Lima",
+      "date": "2024-01-17",
+      "equipment": "Linear accelerator model LA-2000"
+    }
+  ]
+}
