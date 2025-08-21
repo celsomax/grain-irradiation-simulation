@@ -1,0 +1,56 @@
+{
+  "experiments": [
+    {
+      "sample_id": "WH001",
+      "material": "wheat",
+      "dose": 2.5,
+      "dose_rate": 1.25,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1000,
+      "distance": 50,
+      "temperature": 25,
+      "humidity": 65,
+      "notes": "Control sample"
+    },
+    {
+      "sample_id": "WH002",
+      "material": "wheat",
+      "dose": 5.0,
+      "dose_rate": 2.5,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1000,
+      "distance": 50,
+      "temperature": 25,
+      "humidity": 65,
+      "notes": "Standard treatment"
+    },
+    {
+      "sample_id": "RI001",
+      "material": "rice",
+      "dose": 2.0,
+      "dose_rate": 1.0,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1000,
+      "distance": 60,
+      "temperature": 22,
+      "humidity": 70,
+      "notes": "Control sample"
+    },
+    {
+      "sample_id": "RI002",
+      "material": "rice",
+      "dose": 4.0,
+      "dose_rate": 2.0,
+      "exposure_time": 2.0,
+      "source_type": "Co-60",
+      "source_activity": 1000,
+      "distance": 60,
+      "temperature": 22,
+      "humidity": 70,
+      "notes": "Standard treatment"
+    }
+  ]
+}
