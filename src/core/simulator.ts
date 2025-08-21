@@ -216,8 +216,7 @@ export class IrradiationSimulator {
    * Compare simulation results with experimental data
    */
   async compareWithExperimental(
-    experimentalData: ExperimentalData[],
-    _simulationTolerance: number = 0.1
+    experimentalData: ExperimentalData[]
   ): Promise<ComparisonResults> {
     console.info(`Comparing with ${experimentalData.length} experimental data points`);
 

@@ -141,7 +141,7 @@ export class DataLoader {
       });
 
       try {
-        const experimentalData = this.parseExperimentalRecord(record, i - 1);
+        const experimentalData = this.parseExperimentalRecord(record);
         result.push(experimentalData);
       } catch (error) {
         this.logger.warn(`Error parsing CSV row ${i}:`, error);
@@ -155,7 +155,7 @@ export class DataLoader {
   /**
    * Parse individual experimental record
    */
-  private parseExperimentalRecord(record: any, _index: number): ExperimentalData {
+  private parseExperimentalRecord(record: any): ExperimentalData {
     // Map possible field names to standard format
     const fieldMap: Record<string, string> = {
       'sample_id': 'sampleId',

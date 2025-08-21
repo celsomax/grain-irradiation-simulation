@@ -139,7 +139,7 @@ export class IrradiationPhysics {
   calculateAttenuation(
     material: MaterialProperties,
     thickness: number,
-    _energy: number
+    _energy?: number
   ): number {
     // Beer-Lambert law: I = I₀ * exp(-μ * ρ * x)
     const linearAttenuationCoeff = material.massAttenuationCoefficient * material.density;
